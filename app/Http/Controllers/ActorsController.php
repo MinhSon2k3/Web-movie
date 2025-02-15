@@ -40,23 +40,26 @@ class ActorsController extends Controller
     public function show($id)
     {
         $actor = Http::withToken(config('services.tmdb.token'))
-            ->get("https://api.themoviedb.org/3/person/{$id}")
-            ->json() ?? [];
-
+            ->get('https://api.themoviedb.org/3/person/'.$id)
+            ->json();
+    
         $social = Http::withToken(config('services.tmdb.token'))
-            ->get("https://api.themoviedb.org/3/person/{$id}/external_ids")
-            ->json() ?? [];
-
+            ->get('https://api.themoviedb.org/3/person/'.$id.'/external_ids')
+            ->json();
+    
         $credits = Http::withToken(config('services.tmdb.token'))
-            ->get("https://api.themoviedb.org/3/person/{$id}/combined_credits")
-            ->json() ?? [];
-
+            ->get('https://api.themoviedb.org/3/person/'.$id.'/combined_credits')
+            ->json();
+    
+        // Khởi tạo ViewModel
         $viewModel = new ActorViewModel($actor, $social, $credits);
-
+    
         return view('actors.show', [
             'actor' => $viewModel->actor(),
             'social' => $viewModel->social(),
+            'knownForMovies' => $viewModel->knownForMovies(),  // ✅ Thêm biến này
             'credits' => $viewModel->credits(),
         ]);
     }
+    
 }

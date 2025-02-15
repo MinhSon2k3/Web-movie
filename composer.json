@@ -8,6 +8,7 @@
         "php": "^8.2",
         "laravel/framework": "^11.0",
         "laravel/tinker": "^2.9",
+        "livewire/livewire": "*",
         "spatie/laravel-view-models": "^1.6"
     },
     "require-dev": {

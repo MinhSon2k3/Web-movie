@@ -3,57 +3,53 @@
 namespace App\ViewModels;
 
 use Carbon\Carbon;
-use Illuminate\Support\Collection;
+use Spatie\ViewModels\ViewModel;
 
-class TvViewModel
+class TvViewModel extends ViewModel
 {
-    public array $popularTv;
-    public array $topRatedTv;
-    public array $genres;
+    public $popularTv;
+    public $topRatedTv;
+    public $genres;
 
-    public function __construct(array $popularTv, array $topRatedTv, array $genres)
+    public function __construct($popularTv, $topRatedTv, $genres)
     {
         $this->popularTv = $popularTv;
         $this->topRatedTv = $topRatedTv;
         $this->genres = $genres;
     }
 
-    public function popularTv(): Collection
+    public function popularTv()
     {
         return $this->formatTv($this->popularTv);
     }
 
-    public function topRatedTv(): Collection
+    public function topRatedTv()
     {
         return $this->formatTv($this->topRatedTv);
     }
 
-    public function genres(): Collection
+    public function genres()
     {
-        return collect($this->genres)->mapWithKeys(fn ($genre) => [$genre['id'] => $genre['name']]);
+        return collect($this->genres)->mapWithKeys(function ($genre) {
+            return [$genre['id'] => $genre['name']];
+        });
     }
 
-    private function formatTv(array $tv): Collection
+    private function formatTv($tv)
     {
-        return collect($tv)->map(function ($tvshow) {
-            $genresFormatted = collect($tvshow['genre_ids'])
-                ->map(fn ($id) => $this->genres()->get($id, ''))
-                ->filter()
-                ->implode(', ');
+        return collect($tv)->map(function($tvshow) {
+            $genresFormatted = collect($tvshow['genre_ids'])->mapWithKeys(function($value) {
+                return [$value => $this->genres()->get($value)];
+            })->implode(', ');
 
-            return [
-                'poster_path' => $tvshow['poster_path']
-                    ? 'https://image.tmdb.org/t/p/w500/' . $tvshow['poster_path']
-                    : 'https://via.placeholder.com/500x750',
-                'vote_average' => isset($tvshow['vote_average']) ? $tvshow['vote_average'] * 10 . '%' : 'N/A',
-                'first_air_date' => isset($tvshow['first_air_date']) 
-                    ? Carbon::parse($tvshow['first_air_date'])->format('M d, Y') 
-                    : 'Unknown',
+            return collect($tvshow)->merge([
+                'poster_path' => 'https://image.tmdb.org/t/p/w500/'.$tvshow['poster_path'],
+                'vote_average' => $tvshow['vote_average'] * 10 .'%',
+                'first_air_date' => Carbon::parse($tvshow['first_air_date'])->format('M d, Y'),
                 'genres' => $genresFormatted,
-                'id' => $tvshow['id'] ?? null,
-                'name' => $tvshow['name'] ?? 'N/A',
-                'overview' => $tvshow['overview'] ?? '',
-            ];
+            ])->only([
+                'poster_path', 'id', 'genre_ids', 'name', 'vote_average', 'overview', 'first_air_date', 'genres',
+            ]);
         });
     }
 }
