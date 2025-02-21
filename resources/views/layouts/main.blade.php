@@ -33,7 +33,7 @@
                     <a href="{{ route('actors.index') }}" class="hover:text-gray-300">Actors</a>
                 </li>
                 <li class="md:ml-6 mt-3 md:mt-0">
-                    <label for=""> Favorite lish</label>
+                    <label for=""> Favorite list</label>
                 </li>
             </ul>
             <div class="flex flex-col md:flex-row items-center">
