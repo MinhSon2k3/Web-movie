@@ -8,7 +8,6 @@
             @foreach ($popularTv as $tvshow)
             <x-tv-card :tvshow="$tvshow" />
             @endforeach
-
         </div>
     </div> <!-- end popular-tv -->
 

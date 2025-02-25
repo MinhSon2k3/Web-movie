@@ -39,9 +39,10 @@
                     @endforeach
                 </div>
             </div>
+            <br>
             <button id="favorite-btn" data-movie="{{ json_encode($movie) }}"
-                class="bg-orange-500 text-gray-900 rounded font-semibold px-5 py-2 hover:bg-orange-600 transition ease-in-out duration-150">
-                Favorite
+                class="bg-orange-500 text-gray-900 rounded font-semibold px-5 py-3 hover:bg-orange-600 transition ease-in-out duration-150">
+                Thêm vào danh sách yêu thích
             </button>
 
             <div x-data="{ isOpen: false }">
@@ -54,7 +55,7 @@
                             <path
                                 d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
                         </svg>
-                        <span class="ml-2">Play Trailer</span>
+                        <span class="ml-2">Xem Trailer</span>
                     </button>
                 </div>
 
@@ -92,7 +93,7 @@
 
 <div class="movie-cast border-b border-gray-800">
     <div class="container mx-auto px-4 py-16">
-        <h2 class="text-4xl font-semibold">Cast</h2>
+        <h2 class="text-4xl font-semibold">Diễn viên</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
             @foreach ($movie['cast'] as $cast)
             <div class="mt-8">
@@ -115,7 +116,7 @@
 
 <div class="movie-images" x-data="{ isOpen: false, image: ''}">
     <div class="container mx-auto px-4 py-16">
-        <h2 class="text-4xl font-semibold">Images</h2>
+        <h2 class="text-4xl font-semibold">Ảnh mô tả</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             @foreach ($movie['images'] as $image)
             <div class="mt-8">
