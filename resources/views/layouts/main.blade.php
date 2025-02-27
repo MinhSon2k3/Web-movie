@@ -55,17 +55,6 @@
                 API</a>
         </div>
     </footer>
-
-    <div id="favorite-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center">
-        <div class="bg-gray-900 rounded-lg p-6 w-3/4 max-w-2xl">
-            <div class="flex justify-between items-center border-b pb-2">
-                <h2 class="text-xl font-semibold">Favorite Movies</h2>
-                <button id="close-modal" class="text-3xl leading-none hover:text-gray-300">X</button>
-            </div>
-            <div id="favorite-list" class="mt-4 space-y-4"></div>
-        </div>
-    </div>
-
     @livewireScripts
     @yield('scripts')
 

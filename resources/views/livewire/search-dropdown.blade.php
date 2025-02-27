@@ -3,7 +3,7 @@
         wire:model.lazy="search"
         type="text"
         class="bg-gray-800 text-sm rounded-full w-64 px-4 pl-8 py-1 focus:outline-none focus:shadow-outline"
-        placeholder="Search..."
+        placeholder="Tìm kiếm..."
         x-ref="search"
         @focus="isOpen = true"
         @keydown="isOpen = true"
@@ -27,7 +27,7 @@
                     @endforeach
                 </ul>
             @else
-                <div class="px-3 py-3">No results for "{{ $search }}"</div>
+                <div class="px-3 py-3">Không có kết quả "{{ $search }}"</div>
             @endif
         </div>
     @endif

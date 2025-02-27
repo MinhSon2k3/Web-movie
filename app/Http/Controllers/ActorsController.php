@@ -28,6 +28,8 @@ class ActorsController extends Controller
         return view('actors.index', [
             'popularActors' => $viewModel->popularActors(),
             'page' => $viewModel->page(),
+            'previous' => $viewModel->previous(),  // Thêm dòng này
+            'next' => $viewModel->next(),         // Thêm dòng này
         ]);
     }
 

@@ -16,9 +16,10 @@ document.addEventListener('DOMContentLoaded', function() {
     let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
     if (favorites.length === 0) {
-        favoriteList.innerHTML = `<p class="text-gray-400 text-lg">Không có phim yêu thích nào.</p>`;
-        return;
-    }
+    favoriteList.classList.remove('grid', 'grid-cols-1', 'sm:grid-cols-2', 'md:grid-cols-3', 'lg:grid-cols-5', 'gap-8');
+    favoriteList.innerHTML = `<p class="text-gray-400 text-lg text-center">Không có phim yêu thích nào.</p>`;
+    return;
+    }   
 
     favorites.forEach(movie => {
         let movieItem = document.createElement('div');
